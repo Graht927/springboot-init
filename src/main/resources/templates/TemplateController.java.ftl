@@ -2,10 +2,10 @@ package ${packageName}.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import ${packageName}.annotation.AuthCheck;
-import ${packageName}.commons.BaseResponse;
+import ${packageName}.commons.ResultApi;
 import ${packageName}.commons.DeleteRequest;
 import ${packageName}.commons.ErrorCode;
-import ${packageName}.commons.ResultUtils;
+import ${packageName}.commons.ResultUtil;
 import ${packageName}.constant.UserConstant;
 import ${packageName}.exception.BusinessException;
 import ${packageName}.exception.ThrowUtils;
@@ -51,7 +51,7 @@ public class ${upperDataKey}Controller {
      * @return
      */
     @PostMapping("/add")
-    public BaseResponse<Long> add${upperDataKey}(@RequestBody ${upperDataKey}AddRequest ${dataKey}AddRequest, HttpServletRequest request) {
+    public ResultApi<Long> add${upperDataKey}(@RequestBody ${upperDataKey}AddRequest ${dataKey}AddRequest, HttpServletRequest request) {
         ThrowUtils.throwIf(${dataKey}AddRequest == null, ErrorCode.PARAMS_ERROR);
         // todo 在此处将实体类和 request 进行转换
         ${upperDataKey} ${dataKey} = new ${upperDataKey}();
@@ -66,7 +66,7 @@ public class ${upperDataKey}Controller {
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
         // 返回新写入的数据 id
         long new${upperDataKey}Id = ${dataKey}.getId();
-        return ResultUtils.success(new${upperDataKey}Id);
+        return ResultUtil.success(new${upperDataKey}Id);
     }
 
     /**
@@ -77,7 +77,7 @@ public class ${upperDataKey}Controller {
      * @return
      */
     @PostMapping("/delete")
-    public BaseResponse<Boolean> delete${upperDataKey}(@RequestBody DeleteRequest deleteRequest, HttpServletRequest request) {
+    public ResultApi<Boolean> delete${upperDataKey}(@RequestBody DeleteRequest deleteRequest, HttpServletRequest request) {
         if (deleteRequest == null || deleteRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -93,7 +93,7 @@ public class ${upperDataKey}Controller {
         // 操作数据库
         boolean result = ${dataKey}Service.removeById(id);
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
-        return ResultUtils.success(true);
+        return ResultUtil.success(true);
     }
 
     /**
@@ -104,7 +104,7 @@ public class ${upperDataKey}Controller {
      */
     @PostMapping("/update")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
-    public BaseResponse<Boolean> update${upperDataKey}(@RequestBody ${upperDataKey}UpdateRequest ${dataKey}UpdateRequest) {
+    public ResultApi<Boolean> update${upperDataKey}(@RequestBody ${upperDataKey}UpdateRequest ${dataKey}UpdateRequest) {
         if (${dataKey}UpdateRequest == null || ${dataKey}UpdateRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -120,7 +120,7 @@ public class ${upperDataKey}Controller {
         // 操作数据库
         boolean result = ${dataKey}Service.updateById(${dataKey});
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
-        return ResultUtils.success(true);
+        return ResultUtil.success(true);
     }
 
     /**
@@ -130,13 +130,13 @@ public class ${upperDataKey}Controller {
      * @return
      */
     @GetMapping("/get/vo")
-    public BaseResponse<${upperDataKey}VO> get${upperDataKey}VOById(long id, HttpServletRequest request) {
+    public ResultApi<${upperDataKey}VO> get${upperDataKey}VOById(long id, HttpServletRequest request) {
         ThrowUtils.throwIf(id <= 0, ErrorCode.PARAMS_ERROR);
         // 查询数据库
         ${upperDataKey} ${dataKey} = ${dataKey}Service.getById(id);
         ThrowUtils.throwIf(${dataKey} == null, ErrorCode.NOT_FOUND_ERROR);
         // 获取封装类
-        return ResultUtils.success(${dataKey}Service.get${upperDataKey}VO(${dataKey}, request));
+        return ResultUtil.success(${dataKey}Service.get${upperDataKey}VO(${dataKey}, request));
     }
 
     /**
@@ -147,13 +147,13 @@ public class ${upperDataKey}Controller {
      */
     @PostMapping("/list/page")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
-    public BaseResponse<Page<${upperDataKey}>> list${upperDataKey}ByPage(@RequestBody ${upperDataKey}QueryRequest ${dataKey}QueryRequest) {
+    public ResultApi<Page<${upperDataKey}>> list${upperDataKey}ByPage(@RequestBody ${upperDataKey}QueryRequest ${dataKey}QueryRequest) {
         long current = ${dataKey}QueryRequest.getCurrent();
         long size = ${dataKey}QueryRequest.getPageSize();
         // 查询数据库
         Page<${upperDataKey}> ${dataKey}Page = ${dataKey}Service.page(new Page<>(current, size),
                 ${dataKey}Service.getQueryWrapper(${dataKey}QueryRequest));
-        return ResultUtils.success(${dataKey}Page);
+        return ResultUtil.success(${dataKey}Page);
     }
 
     /**
@@ -164,7 +164,7 @@ public class ${upperDataKey}Controller {
      * @return
      */
     @PostMapping("/list/page/vo")
-    public BaseResponse<Page<${upperDataKey}VO>> list${upperDataKey}VOByPage(@RequestBody ${upperDataKey}QueryRequest ${dataKey}QueryRequest,
+    public ResultApi<Page<${upperDataKey}VO>> list${upperDataKey}VOByPage(@RequestBody ${upperDataKey}QueryRequest ${dataKey}QueryRequest,
                                                                HttpServletRequest request) {
         long current = ${dataKey}QueryRequest.getCurrent();
         long size = ${dataKey}QueryRequest.getPageSize();
@@ -174,7 +174,7 @@ public class ${upperDataKey}Controller {
         Page<${upperDataKey}> ${dataKey}Page = ${dataKey}Service.page(new Page<>(current, size),
                 ${dataKey}Service.getQueryWrapper(${dataKey}QueryRequest));
         // 获取封装类
-        return ResultUtils.success(${dataKey}Service.get${upperDataKey}VOPage(${dataKey}Page, request));
+        return ResultUtil.success(${dataKey}Service.get${upperDataKey}VOPage(${dataKey}Page, request));
     }
 
     /**
@@ -185,7 +185,7 @@ public class ${upperDataKey}Controller {
      * @return
      */
     @PostMapping("/my/list/page/vo")
-    public BaseResponse<Page<${upperDataKey}VO>> listMy${upperDataKey}VOByPage(@RequestBody ${upperDataKey}QueryRequest ${dataKey}QueryRequest,
+    public ResultApi<Page<${upperDataKey}VO>> listMy${upperDataKey}VOByPage(@RequestBody ${upperDataKey}QueryRequest ${dataKey}QueryRequest,
                                                                  HttpServletRequest request) {
         ThrowUtils.throwIf(${dataKey}QueryRequest == null, ErrorCode.PARAMS_ERROR);
         // 补充查询条件，只查询当前登录用户的数据
@@ -199,7 +199,7 @@ public class ${upperDataKey}Controller {
         Page<${upperDataKey}> ${dataKey}Page = ${dataKey}Service.page(new Page<>(current, size),
                 ${dataKey}Service.getQueryWrapper(${dataKey}QueryRequest));
         // 获取封装类
-        return ResultUtils.success(${dataKey}Service.get${upperDataKey}VOPage(${dataKey}Page, request));
+        return ResultUtil.success(${dataKey}Service.get${upperDataKey}VOPage(${dataKey}Page, request));
     }
 
     /**
@@ -210,7 +210,7 @@ public class ${upperDataKey}Controller {
      * @return
      */
     @PostMapping("/edit")
-    public BaseResponse<Boolean> edit${upperDataKey}(@RequestBody ${upperDataKey}EditRequest ${dataKey}EditRequest, HttpServletRequest request) {
+    public ResultApi<Boolean> edit${upperDataKey}(@RequestBody ${upperDataKey}EditRequest ${dataKey}EditRequest, HttpServletRequest request) {
         if (${dataKey}EditRequest == null || ${dataKey}EditRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -231,7 +231,7 @@ public class ${upperDataKey}Controller {
         // 操作数据库
         boolean result = ${dataKey}Service.updateById(${dataKey});
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
-        return ResultUtils.success(true);
+        return ResultUtil.success(true);
     }
 
     // endregion

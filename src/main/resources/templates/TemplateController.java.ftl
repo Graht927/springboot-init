@@ -2,17 +2,17 @@ package ${packageName}.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import ${packageName}.annotation.AuthCheck;
-import ${packageName}.common.BaseResponse;
-import ${packageName}.common.DeleteRequest;
-import ${packageName}.common.ErrorCode;
-import ${packageName}.common.ResultUtils;
+import ${packageName}.commons.BaseResponse;
+import ${packageName}.commons.DeleteRequest;
+import ${packageName}.commons.ErrorCode;
+import ${packageName}.commons.ResultUtils;
 import ${packageName}.constant.UserConstant;
 import ${packageName}.exception.BusinessException;
 import ${packageName}.exception.ThrowUtils;
-import ${packageName}.model.dto.${dataKey}.${upperDataKey}AddRequest;
-import ${packageName}.model.dto.${dataKey}.${upperDataKey}EditRequest;
-import ${packageName}.model.dto.${dataKey}.${upperDataKey}QueryRequest;
-import ${packageName}.model.dto.${dataKey}.${upperDataKey}UpdateRequest;
+import ${packageName}.model.request.${dataKey}.${upperDataKey}AddRequest;
+import ${packageName}.model.request.${dataKey}.${upperDataKey}EditRequest;
+import ${packageName}.model.request.${dataKey}.${upperDataKey}QueryRequest;
+import ${packageName}.model.request.${dataKey}.${upperDataKey}UpdateRequest;
 import ${packageName}.model.entity.${upperDataKey};
 import ${packageName}.model.entity.User;
 import ${packageName}.model.vo.${upperDataKey}VO;
@@ -53,7 +53,7 @@ public class ${upperDataKey}Controller {
     @PostMapping("/add")
     public BaseResponse<Long> add${upperDataKey}(@RequestBody ${upperDataKey}AddRequest ${dataKey}AddRequest, HttpServletRequest request) {
         ThrowUtils.throwIf(${dataKey}AddRequest == null, ErrorCode.PARAMS_ERROR);
-        // todo 在此处将实体类和 DTO 进行转换
+        // todo 在此处将实体类和 request 进行转换
         ${upperDataKey} ${dataKey} = new ${upperDataKey}();
         BeanUtils.copyProperties(${dataKey}AddRequest, ${dataKey});
         // 数据校验
@@ -108,7 +108,7 @@ public class ${upperDataKey}Controller {
         if (${dataKey}UpdateRequest == null || ${dataKey}UpdateRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        // todo 在此处将实体类和 DTO 进行转换
+        // todo 在此处将实体类和 request 进行转换
         ${upperDataKey} ${dataKey} = new ${upperDataKey}();
         BeanUtils.copyProperties(${dataKey}UpdateRequest, ${dataKey});
         // 数据校验
@@ -214,7 +214,7 @@ public class ${upperDataKey}Controller {
         if (${dataKey}EditRequest == null || ${dataKey}EditRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        // todo 在此处将实体类和 DTO 进行转换
+        // todo 在此处将实体类和 request 进行转换
         ${upperDataKey} ${dataKey} = new ${upperDataKey}();
         BeanUtils.copyProperties(${dataKey}EditRequest, ${dataKey});
         // 数据校验

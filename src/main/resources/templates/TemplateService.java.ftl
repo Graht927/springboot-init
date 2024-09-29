@@ -3,7 +3,7 @@ package ${packageName}.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import ${packageName}.model.dto.${dataKey}.${upperDataKey}QueryRequest;
+import ${packageName}.model.request.${dataKey}.${upperDataKey}QueryRequest;
 import ${packageName}.model.entity.${upperDataKey};
 import ${packageName}.model.vo.${upperDataKey}VO;
 

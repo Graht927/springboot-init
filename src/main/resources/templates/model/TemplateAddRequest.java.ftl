@@ -1,4 +1,4 @@
-package ${packageName}.model.dto.${dataKey};
+package ${packageName}.model.request.${dataKey};
 
 import lombok.Data;
 

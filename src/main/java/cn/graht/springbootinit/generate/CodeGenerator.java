@@ -66,21 +66,21 @@ public class CodeGenerator {
         doGenerate(inputPath, outputPath, dataModel);
         System.out.println("生成 Service 实现类成功，文件路径：" + outputPath);
 
-        // 3、生成数据模型封装类（包括 DTO 和 VO）
-        // 生成 DTO
+        // 3、生成数据模型封装类（包括 request 和 VO）
+        // 生成 request
         inputPath = projectPath + File.separator + "src/main/resources/templates/model/TemplateAddRequest.java.ftl";
-        outputPath = String.format("%s/generator/model/dto/%sAddRequest.java", projectPath, upperDataKey);
+        outputPath = String.format("%s/generator/model/request/%sAddRequest.java", projectPath, upperDataKey);
         doGenerate(inputPath, outputPath, dataModel);
         inputPath = projectPath + File.separator + "src/main/resources/templates/model/TemplateQueryRequest.java.ftl";
-        outputPath = String.format("%s/generator/model/dto/%sQueryRequest.java", projectPath, upperDataKey);
+        outputPath = String.format("%s/generator/model/request/%sQueryRequest.java", projectPath, upperDataKey);
         doGenerate(inputPath, outputPath, dataModel);
         inputPath = projectPath + File.separator + "src/main/resources/templates/model/TemplateEditRequest.java.ftl";
-        outputPath = String.format("%s/generator/model/dto/%sEditRequest.java", projectPath, upperDataKey);
+        outputPath = String.format("%s/generator/model/request/%sEditRequest.java", projectPath, upperDataKey);
         doGenerate(inputPath, outputPath, dataModel);
         inputPath = projectPath + File.separator + "src/main/resources/templates/model/TemplateUpdateRequest.java.ftl";
-        outputPath = String.format("%s/generator/model/dto/%sUpdateRequest.java", projectPath, upperDataKey);
+        outputPath = String.format("%s/generator/model/request/%sUpdateRequest.java", projectPath, upperDataKey);
         doGenerate(inputPath, outputPath, dataModel);
-        System.out.println("生成 DTO 成功，文件路径：" + outputPath);
+        System.out.println("生成 request 成功，文件路径：" + outputPath);
         // 生成 VO
         inputPath = projectPath + File.separator + "src/main/resources/templates/model/TemplateVO.java.ftl";
         outputPath = String.format("%s/generator/model/vo/%sVO.java", projectPath, upperDataKey);
